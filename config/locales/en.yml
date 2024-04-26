@@ -1,0 +1,10 @@
+en:
+  animal:
+    new:
+      title: 'Seach dogs by breed'
+      form:
+        label:
+          breed: 'Breed'
+
+  button:
+    submit: 'Submit'        

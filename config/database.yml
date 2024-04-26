@@ -1,0 +1,34 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  idle_timeout: 60
+  port: 5432
+
+
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+development:
+  <<: *default
+  adapter: postgresql
+  database: dog_api_development
+  username: postgres
+  password: postgres
+  host: localhost
+  # db
+
+test:
+  <<: *default
+  adapter: postgresql
+  database: dog_api_test
+  username: postgres
+  password: postgres
+  host: localhost
+
+production:
+  <<: *default
+  adapter: postgresql
+  database: <%= ENV['TEMPLATEAPP_DATABASE'] %>
+  username: <%= ENV['TEMPLATEAPP_DATABASE_USER'] %>
+  password: <%= ENV['TEMPLATEAPP_DATABASE_PASSWORD'] %>
+  host: <%= ENV['TEMPLATE_DATABASE_HOSTNAME'] %>

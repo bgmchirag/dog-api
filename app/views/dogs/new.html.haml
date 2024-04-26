@@ -1,0 +1,20 @@
+%section.padding-10
+  .lg:flex.lg:items-center.lg:justify-between
+    .min-w-0.flex-4
+      %h2.text-2xl.font-bold.leading-7.text-gray-900.sm:truncate.sm:text-3xl.sm:tracking-tight
+        = t('animal.new.title')
+  = turbo_frame_tag 'anyframe' do
+    %div
+      = form_with scope: :dog, url: dogs_path, local: true do |form|
+        = form.label :breed, t('animal.new.form.label.breed'), class: 'block text-sm font-medium leading-6 text-gray-900'
+        = form.text_field :breed, required: true, value: "#{local_assigns[:breed] || nil}", class: 'lock w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 width-400 input-field'
+        = form.submit t('button.submit'), class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+      %div
+        - if local_assigns[:breed]
+          %div
+            %h2
+              Result of #{local_assigns[:breed]}
+            - if local_assigns[:status] == 'error'
+              %p.error= local_assigns[:response]
+            - else
+              %p= image_tag(local_assigns[:response])
